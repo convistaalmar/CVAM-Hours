@@ -1,11 +1,31 @@
+h1. CVAM Hours
+
 *A simple hours logging Django app.*
 It's not really ready for you all. Just for us.
 
 h2. Install
 
-* Copy local_settings.py.tmpl into local_settings.py
+* Copy hours/local_settings.py.tmpl into local_settings.py
 * Edit db name, user and password. 
 * Create a secret key.
 
-To use under wsgi, copy django.wsgi.tmpl into django.wsgi
+
+To use under wsgi, copy apache/django.wsgi.tmpl into django.wsgi
 and link to it in your WSGIScriptAlias directive.
+
+h2. Setup
+
+# Create db tables and admin user
+@django manage.py syncdb@
+# Login with that user
+# Create a _Client_.
+# Create a _Project_ for that client.
+# Create a few _Work types_.
+
+h3. To create an employee
+
+# *First* create it as a *regular user* under Auth > Users. 
+# *Then* edit him in the Log > Employees admin, enabling _Staff status_.
+# Give him all permissions to *Log | Entry* (add, change, delete)
+# Assign him to the desired Projects and Work types.
+# The new user is ready to log hours!
