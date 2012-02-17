@@ -1,0 +1,11 @@
+*A simple hours logging Django app.*
+It's not really ready for you all. Just for us.
+
+h2. Install
+
+* Copy local_settings.py.tmpl into local_settings.py
+* Edit db name, user and password. 
+* Create a secret key.
+
+To use under wsgi, copy django.wsgi.tmpl into django.wsgi
+and link to it in your WSGIScriptAlias directive.
