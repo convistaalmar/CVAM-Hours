@@ -1,0 +1,84 @@
+{% extends "admin/change_list.html" %}
+{% load adminmedia admin_list i18n %}
+
+{% block extrastyle %}{{ block.super }}
+<style type="text/css">
+
+#changelist .last_row td {
+    border: 0 !important;
+    border-top: 2px solid #ddd !important;
+	}
+
+#changelist .last_row td {	
+	border-right: none ! important;
+	border-left: none ! important;
+	}
+
+#changelist .last_row td:nth-child(2) {	
+	text-align: right; 
+	}
+
+.paginator strong {
+	color: #000;
+	font-weight: normal;
+	}
+	
+.paginator i {
+	font-style: normal;
+    text-shadow: 0 0 5px rgba(0, 169, 224, .9);	
+	}
+	
+
+
+#result_list i {
+	font-style: normal;	
+/*	display: block;
+	overflow: hidden;
+	width: 800px;
+	white-space: nowrap;
+*/	
+	}
+
+/*
+.c0, .c1, .c2, .c3, .c5, .c6, .c7 {
+	width: 20px;
+	overflow: hidden;
+	}
+
+
+#result_list td,
+#result_list th {
+	overflow: hidden;
+	white-space: nowrap;
+	}	
+*/	
+	
+</style>
+{% endblock %}
+
+{% block extrahead %}{{ block.super }}
+<script>
+django.jQuery(function($) { 
+
+	/*$('#changelist table').prepend(
+		'<colgroup>' +
+		'	<col class="c0" />' +
+		'	<col class="c1" />' +
+		'	<col class="c2" />' +
+		'	<col class="c3" />' +
+		'	<col class="c4" />' +
+		'	<col class="c5" />' +		
+		'	<col class="c6" />' +					
+		'</colgroup>'
+	);*/
+
+	$('.paginator').append(
+		' <i>&lowast;</i> <strong>{{ total_hours }} hs.</strong>'
+	);			
+			
+});	
+
+
+
+</script>
+{% endblock %}

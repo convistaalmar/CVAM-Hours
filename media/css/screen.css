@@ -1,0 +1,59 @@
+h1,h2,h3,h4,h5,h6,pre,code,table,td,th,dd,dt,dl,li,input,button,select,textarea{ font-size: 100%; }
+ul,ol,h1,h2,h3,h4,h5,h6,pre,form,body,html,p,blockquote,fieldset,input,td { margin:0; padding:0; }
+a img, :link img, :visited img { border:none }
+table {border-collapse: collapse; }
+input,button,select,textarea {font-family: inherit;}
+input, select { vertical-align:middle; }
+
+.clearBoth { /* For clearing floats */
+	clear: both; 
+	height: 0px;
+	margin: 0; 
+	padding: 0; 
+	font-size: 0%;
+	line-height: 0px; 
+	}
+
+.alt { /* For alternate content for screen readers */
+	position: absolute;
+ 	left: 0px;
+ 	top: -2000px;
+	width: 1px;
+ 	height: 1px;
+ 	overflow: hidden;	
+	}
+
+hr {
+	display: none;
+	}
+
+
+
+
+/* G E N E R A L 
+***************************/
+	
+a {color: #0000FF;}
+a:hover { text-decoration: none; }
+a:visited {color: #660099;}
+	
+	
+body {
+	font-size: 76%; 	/* Don't change this size or this height. */
+	line-height: 1em;   /* Change them below at #container */
+	background-color: #CCCCCC;
+	text-align: center;
+	}
+
+#container {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 106%; 
+	line-height: 1.31em;
+	width: 768px;
+	background: #fff;
+	margin: 0 auto 0 auto;
+	text-align: left;
+	}
+
+
+	
