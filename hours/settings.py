@@ -58,8 +58,7 @@ if not SERVER_PROD:
 else:
 	DEBUG = False
 
-# ADMIN emails
-ADMINS = (('Manuel Razzari', 'manuel@cvam.com.ar'),)
+
 MANAGERS = ADMINS
 
 
