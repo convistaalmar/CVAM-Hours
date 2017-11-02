@@ -1,3 +1,4 @@
+from copy import copy
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
@@ -77,17 +78,22 @@ class EntryAdmin(admin.ModelAdmin):
 	list_filter = ['project', 'work_type']
 
 	
-	def changelist_view(self, request, extra_context=None):
-
-		# Admin vs employee changelist view			
+	def get_list_display(self, request):
+		list_display = copy(self.list_display)
 		if request.user.is_superuser:
-			if 'employee' not in self.list_display: self.list_display += ['employee']
-			if 'employee' not in self.list_filter: self.list_filter += ['employee']	
-			if 'project__client' not in self.list_filter: self.list_filter += ['project__client']
-		else:
-			pass
-
-
+			if 'employee' not in list_display: list_display += ['employee']
+		return list_display
+	
+	
+	def get_list_filter(self, request):
+		list_filter = copy(self.list_filter)
+		if request.user.is_superuser:
+			if 'employee' not in list_filter: list_filter += ['employee']	
+			if 'project__client' not in list_filter: list_filter += ['project__client']
+		return list_filter	
+	
+	
+	def changelist_view(self, request, extra_context=None):
 		# Get a query set with same filters as the current change list
 		from django.contrib.admin.views.main import ChangeList
 		from datetime import timedelta
@@ -111,7 +117,9 @@ class EntryAdmin(admin.ModelAdmin):
 		}
 
 		if extra_context: extra = extra.update(extra_context)
+		
 		return super(EntryAdmin, self).changelist_view(request, extra_context=extra)
+
 		
 	def message_text(self, obj): 
 		return '<i>%s</i>' % Truncator(obj.message).words(40)
