@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.forms.fields import TimeField
 from django.forms.widgets import TimeInput, Textarea
-from django.utils.text import truncate_words
+from django.utils.text import Truncator
 from log.models import *
 
 
@@ -23,15 +23,16 @@ class EntryAdmin(admin.ModelAdmin):
 		if db_field.name == 'work_type':
 			kwargs['queryset'] = WorkType.objects.filter(employee=request.user.employee)					
 			if latest: kwargs['initial'] = latest.work_type
-			
+		
+		# FIXME si edito entradas de otros, se cambia el valor del desplegable		
 		return super(EntryAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 	# Simon Willison's row-level admin permissions 
 	# http://djangosnippets.org/snippets/1054
-
-	def queryset(self, request):
-		qs = super(EntryAdmin, self).queryset(request)
+	
+	def get_queryset(self, request):
+		qs = super(EntryAdmin, self).get_queryset(request)
 		if request.user.is_superuser:
 			return qs
 		else:
@@ -88,8 +89,12 @@ class EntryAdmin(admin.ModelAdmin):
 		# Get a query set with same filters as the current change list
 		from django.contrib.admin.views.main import ChangeList
 		from datetime import timedelta
-		cl = ChangeList(request, self.model, self.list_display, self.list_display_links, self.list_filter, self.date_hierarchy, self.search_fields, self.list_select_related, self.list_per_page, self.list_editable, self)
-		filtered_query_set = cl.get_query_set()
+		cl = ChangeList(request, self.model, self.list_display, self.list_display_links, 
+						self.list_filter, self.date_hierarchy, self.search_fields, 
+						self.list_select_related, self.list_per_page, self.list_max_show_all, 
+						self.list_editable, self)
+
+		filtered_query_set = cl.get_queryset(request)
 		hours = timedelta()
 		for hour in [entry.hours for entry in filtered_query_set]:
 			hours += timedelta(hours=hour.hour,minutes=hour.minute)
@@ -107,9 +112,9 @@ class EntryAdmin(admin.ModelAdmin):
 		return super(EntryAdmin, self).changelist_view(request, extra_context=extra)
 		
 	def message_text(self, obj): 
-		return '<i>%s</i>' % truncate_words(obj.message, 40)
+		return '<i>%s</i>' % Truncator(obj.message).words(40)
 	message_text.allow_tags = True		
-	
+
 admin.site.register(Entry, EntryAdmin)
 admin.site.register(Project)
 admin.site.register(Client)

@@ -1,5 +1,5 @@
 {% extends "admin/base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}{{ title }} | Hours{% endblock %}
 
@@ -11,7 +11,7 @@
 <script type="text/javascript">
 MEDIA_URL = '{{ MEDIA_URL }}';
 </script>
-<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/admin.css" />
+<link rel="stylesheet" type="text/css" href="{% static "css/admin.css" %}" />
 <style type="text/css">
 	{% if not user.is_superuser %}
 	{# FIXME esto es un hack groso, xq mod_wsgi me mezcla el request.user en admin.py > changelist_view #}
@@ -20,7 +20,7 @@ MEDIA_URL = '{{ MEDIA_URL }}';
 	}
 	{% endif %}
 </style>
-<link rel="Shortcut Icon" type="image/x-icon" href="{{ MEDIA_URL }}img/favicon.ico" />
+<link rel="Shortcut Icon" type="image/x-icon" href="{% static "img/favicon.ico" %}" />
 
 {% endblock %}
 

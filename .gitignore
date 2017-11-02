@@ -1,5 +1,8 @@
 
 /.eprj
-/media/_src
+/.env
+/_src
 /hours/settings_local.py
-/apache/django.wsgi
+/hours/django.wsgi
+db.sqlite3
+*.pyc

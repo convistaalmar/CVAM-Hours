@@ -1,8 +1,6 @@
 from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User, UserManager
-from django.db.models.signals import pre_save
-import filterspecs
 
 class Entry(models.Model):
 	
@@ -82,6 +80,5 @@ class Employee(User):
 		
 	class Meta:
 		ordering = ["last_name"]				
-
 
 
