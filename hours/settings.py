@@ -121,6 +121,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
+
 # Import local settings
 try:
     from .settings_local import *

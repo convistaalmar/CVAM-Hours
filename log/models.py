@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.db import models
-from django.contrib.auth.models import User, UserManager
+from django.conf import settings
 
 class Entry(models.Model):
 	
@@ -62,12 +62,11 @@ class WorkType(models.Model):
 		ordering = ["name"]			
 
 
-class Employee(User):
+class Employee(models.Model):
 
+	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True)
 	project = models.ManyToManyField("Project")
 	work_type = models.ManyToManyField("WorkType")
-	
-	objects = UserManager()
 	
 	def latest_entry(self):
 		try:
@@ -76,9 +75,9 @@ class Employee(User):
 			return False
 		
 	def __unicode__(self):
-		return self.get_full_name()
+		return self.user.get_full_name()
 		
 	class Meta:
-		ordering = ["last_name"]				
+		ordering = ["user__last_name"]				
 
 

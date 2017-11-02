@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import User
 from django.forms.fields import TimeField
 from django.forms.widgets import TimeInput, Textarea
 from django.utils.text import Truncator
@@ -115,8 +117,25 @@ class EntryAdmin(admin.ModelAdmin):
 		return '<i>%s</i>' % Truncator(obj.message).words(40)
 	message_text.allow_tags = True		
 
+
+class EmployeeInline(admin.StackedInline):
+    model = Employee
+    can_delete = False
+    verbose_name_plural = 'employee'
+
+class UserAdmin(BaseUserAdmin):
+    inlines = [EmployeeInline]
+
+    def add_view(self, *args, **kwargs):
+        self.inlines = []
+        return super(UserAdmin, self).add_view(*args, **kwargs)
+
+# Re-register UserAdmin
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
+
+# Log admins	
 admin.site.register(Entry, EntryAdmin)
 admin.site.register(Project)
 admin.site.register(Client)
 admin.site.register(WorkType)
-admin.site.register(Employee)
