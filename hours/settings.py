@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from django.conf import global_settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -100,6 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+PASSWORD_HASHERS = global_settings.PASSWORD_HASHERS + ['django.contrib.auth.hashers.SHA1PasswordHasher']
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
