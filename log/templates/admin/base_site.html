@@ -1,4 +1,4 @@
-{% extends "admin/base.html" %}
+{% extends "admin/base_site.html" %}
 {% load i18n static %}
 
 {% block title %}{{ title }} | Hours{% endblock %}
@@ -7,15 +7,10 @@
 <h1 id="site-name">Hours - Con Vista Al Mar</h1>
 {% endblock %}
 
-{% block extrastyle %}{{ block.super }}
-<script type="text/javascript">
-MEDIA_URL = '{{ MEDIA_URL }}';
-</script>
+{% block extrastyle %}
+{{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static "css/admin.css" %}" />
 <link rel="Shortcut Icon" type="image/x-icon" href="{% static "img/favicon.ico" %}" />
-
 {% endblock %}
-
-
 
 {% block nav-global %}{% endblock %}

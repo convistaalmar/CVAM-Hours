@@ -11,7 +11,6 @@ from log.models import *
 class EntryAdmin(admin.ModelAdmin):
 
 	# Change form
-	save_on_top = True
 	exclude = ['employee']	
 
 	# Only show projects and worktypes for this user.
