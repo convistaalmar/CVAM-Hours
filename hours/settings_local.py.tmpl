@@ -1,3 +1,4 @@
+# Add DB settings as needed, or comment out to use sqlite for dev.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
@@ -9,11 +10,9 @@ DATABASES = {
     }
 }
 
-PROJECT_URL = ''
-SERVER_PROD = False
-PREPEND_WWW = False
-MEDIA_URL = '/media/'
-SECRET_KEY = 'Get one! http://www.miniwebtool.com/django-secret-key-generator/'
+DEBUG = True # True for dev, False for prod
+
+SECRET_KEY = 'Get one here: https://djskgen.herokuapp.com/'
 
 # ADMIN emails
-ADMINS = (('Manuel Razzari', 'manuel@cvam.com.ar'),)
+ADMINS = (('Administrator, 'admin@localhost'),)

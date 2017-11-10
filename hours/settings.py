@@ -20,11 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY WARNING: override this in settings_local with something secret!
 SECRET_KEY = 'zy&!@7plqyb#c!*(dc98np!#2bj^efjaq2z^b*srjuiwq%%=5h'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# SECURITY WARNING: override this in settings_local for local dev.
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -130,4 +130,4 @@ ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
 try:
     from .settings_local import *
 except:
-    print "Didn't import settings_local."
+    print "Notice: Didn't import settings_local."
