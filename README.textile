@@ -4,16 +4,17 @@ A simple hours logging Django app.
 
 h2. Install
 
-# Clone the repo, make an virtual env, and activate it.
+# Clone the repo, make an virtual env, activate it, install dependencies.
 <pre><code>
 git clone https://github.com/convistaalmar/CVAM-Hours.git hours
 cd hours
 virtualenv .env
 source .env/bin/activate
+pip install -r requirements.txt
 </code></pre>
 # Copy @hours/settings_local.py.tmpl@ as @settings_local.py@
-# In the new file, edit DB connection info, or comment it out to dev with sqlite. 
-# You can use this file to override other info from settings.py as needed.
+# In the new file, edit DB connection info, or comment it out for a dev env with sqlite. 
+# You can use this @settings_local.py@ file to override other defaults from @settings.py@ as needed.
 
 h3. Production
 
