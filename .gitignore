@@ -6,3 +6,4 @@
 /hours/django.wsgi
 db.sqlite3
 *.pyc
+\.idea/
