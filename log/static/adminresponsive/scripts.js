@@ -46,6 +46,8 @@
 					var changelist_filter_h2_height = changelist_filter_h2.outerHeight();
 
 					changelist_filter.css("height", changelist_filter_h2_height);
+					changelist_filter.css("order", 1);
+
 				}
 				else {
 					changelist_filter.css("height", "");

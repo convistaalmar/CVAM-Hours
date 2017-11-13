@@ -1,6 +1,6 @@
 from django.contrib.admin import SimpleListFilter
 
-from log.models import Client, Entry
+from log.models import Client
 
 
 class FilterEntriesByClient(SimpleListFilter):

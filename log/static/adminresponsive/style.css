@@ -345,6 +345,7 @@ body.login {
 	}
 
 	#changelist-filter {
+		max-width: 100%;
 		margin-top: 0 !important;
 		overflow-y: hidden;
 		transition: height 0.3s linear;
