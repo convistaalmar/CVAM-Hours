@@ -1,0 +1,703 @@
+.sr-only,
+.login .submit-row label {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	border: 0;
+}
+
+#container {
+	min-width: 0;
+}
+
+.dashboard #content {
+	width: auto;
+	margin-right: 0;
+}
+
+#content {
+	/*max-width: 900px;*/
+	padding: 20px 40px 20px 40px;
+}
+
+.colM #content-main,
+.colMS #content-main,
+.flex #content-main,
+#changelist-form {
+	width: 100%;
+	padding-right: 0;
+}
+
+.dashboard.app-auth #content-main {
+	width: 100% !important;
+	padding-right: 0 !important;
+}
+
+.dashboard .colMS #content-main,
+.module.filtered #changelist-form {
+	width: 66.6666666667%;																/* = 600px * 100% / 900px */
+	padding: 0 4.44444444444% 0 0;												/* = 40px * 100% / 900px */
+}
+
+/* SOLO PARA CASHFLOW */
+
+/*.dashboard.app-cashflow .colMS #content-main {
+	width: 100%;
+	padding-right: 0;
+}*/
+
+#changelist-form {
+	float: left !important;
+}
+
+#changelist .actions,
+#changelist-form .results {
+	margin-right: 0;
+}
+
+span.two_lines {
+	margin-left: 0 !important;
+}
+
+span.two_lines:before {
+	content: "";
+	display: block;
+}
+
+#content-related,
+#changelist-filter {
+	max-width: 350px;
+	float: left;
+	position: static !important;
+	margin-right: 0;
+	width: 28.8888888889% !important;																/* = 260px * 100% / 900px */
+}
+
+#changelist-filter {
+	float: right !important;
+	margin-top: -61px !important;
+	/*margin-top: -88px !important;*/
+}
+
+#content-related {
+	padding-bottom: 14px;
+}
+
+.selector input[type="text"],
+.selector input[type="password"],
+.selector input[type="email"],
+.selector input[type="url"],
+.selector input[type="number"],
+.selector textarea,
+.selector select,
+.selector .vTextField {
+	padding-left: 1.65745856354%;													/* 6px * 100% / 362px */
+	padding-right: 1.65745856354%;												/* 6px * 100% / 362px */
+}
+
+.aligned label + p,
+.aligned label + div.help,
+.aligned label + div.readonly {
+	margin-left: 0 !important;
+	float: left;
+}
+
+.aligned label {
+	width: 18.1818181818% !important;																/* 160px * 100% / 880px */
+	padding-right: 1.13636363636% !important;												/* 10px * 100% / 880px */
+}
+
+.wide label {
+	width: 22.7272727273% !important;																/* 200px * 100% / 880px */
+}
+
+form .wide p,
+form .wide input + p.help,
+form .wide input + div.help {
+	margin-left: 22.7272727273% !important;													/* 200px * 100% / 880px */
+}
+
+.selector .search-label-icon {
+	max-width: 100%;
+}
+
+.related-widget-wrapper {
+	width: 90.9090909091%;																/* = 800px * 100% / 880px */
+	float: none;
+	overflow: visible;
+}
+
+.module.aligned .related-widget-wrapper {
+	width: 80.6818181818%;																/* 710px * 100% / 880px */
+}
+
+.related-widget-wrapper-link.add-related {
+	float: right;
+}
+
+.related-widget-wrapper-link.change-related + .related-widget-wrapper-link.add-related {
+	float: none;
+	display: inline;
+}
+
+.selector {
+	width: 100% !important;
+	float: none !important;
+}
+
+.selector-available, .selector-chosen {
+	width: 46.338028169% !important;											/* = 329px * 100% / 710px */
+}
+
+#profile-group .selector .selector-filter {
+	padding-left: 2.43161094225% !important;													/* = 8px * 100% / 329px */
+	padding-right: 2.43161094225% !important;													/* = 8px * 100% / 329px */
+}
+
+.selector ul.selector-chooser {
+	width: 3.0985915493% !important;															/* = 22px * 100% / 710px */
+	margin-left: 0.70422535211% !important;												/* = 5px * 100% / 710px */
+	margin-right: 0.70422535211% !important;											/* = 5px * 100% / 710px */
+}
+
+form .aligned p.help,
+form .aligned div.help {
+	margin-left: 18.1818181818% !important;													/* = 160px * 100% / 880px */
+	padding-left: 1.13636363636% !important;													/* = 10px * 100% / 880px */
+}
+
+form .aligned .field-is_staff div.help,
+form .aligned .field-is_superuser div.help,
+form .aligned .field-is_superuser .vCheckboxLabel,
+form .aligned .field-is_active div.help {
+	margin-left: 0 !important;
+	float: none !important;
+	padding-left: 0 !important;
+	width: auto !important;
+}
+
+form .aligned .field-is_superuser .vCheckboxLabel {
+	padding-left: 5px !important;
+}
+
+.selector .selector-filter {
+	padding-left: 2.10526315789% !important;													/* = 8px * 100% / 380px */
+	padding-right: 2.10526315789% !important;													/* = 8px * 100% / 380px */
+}
+
+#content-related .module {
+	margin-bottom: 0;
+}
+
+#content-related .module h2 {
+	padding-left: 16px !important;
+	padding-right: 16px !important;
+}
+
+#changelist-filter h2 {
+	padding: 5px 15px !important;
+	letter-spacing: normal !important;
+}
+
+#changelist-filter #filters-summary {
+	display: none;
+	font-size: 11px;
+	text-transform: none;
+}
+
+.form-row {
+	padding-left: 1.11111111111% !important;												/* 10px * 100% / 900px */
+	padding-right: 1.11111111111% !important;												/* 10px * 100% / 900px */
+}
+
+.selector .selector-filter label,
+.inline-group .aligned .selector .selector-filter label {
+	width: 7.39549839228% !important;																/* = 23px * 100% / 311px */
+	padding-right: 0.96463022508% !important;												/* = 3px * 100% / 311px */
+}
+
+.selector .selector-available input {
+	margin-left: 0 !important;
+	padding-left: 1.92926045016% !important;								/* = 6px * 100% / 311px */
+	padding-right: 1.92926045016% !important;								/* = 6px * 100% / 311px */
+	width: 86.4951768489% !important;												/* = 270px * 100% / 311px */
+}
+
+.selector select {
+	width: 100% !important;
+}
+
+.nowrap {
+	white-space: normal;
+}
+
+#changelist #toolbar {
+	margin-right: 33.3333333333%;													/* = 300px * 100% / 900px */
+}
+
+#changelist #toolbar form #searchbar {
+	padding-left: 0.83333333333%;													/* = 5px * 100% / 600px*/
+	padding-right: 0.83333333333%;												/* = 5px * 100% / 600px*/
+	width: 55.1666666667%;																/* = 331px * 100% / 600px*/
+}
+
+p.datetime {
+	width: 80.6818181818%;																/* = 710px * 100% / 880px */
+}
+
+.calendar td a,
+.timelist a,
+.calendar td a,
+.timelist a {
+	background-color: #FFFFFF;
+}
+
+body.login {
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+.login #container {
+	width: auto !important;
+	max-width: 392px;
+	min-width: 0 !important;
+}
+
+.login #container .form-row {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	width: 100% !important;
+}
+
+.login #container #content-main {
+	float: none !important;
+	margin-bottom: 0 !important;
+}	
+
+.login #container .submit-row {
+	display: block;
+	padding-left: 0 !important;
+	text-align: center;
+}
+
+.login #container .submit-row input {
+	font-size: 13px !important;
+}
+
+.login #container #footer {
+	padding: 2px 0 0 0!important;
+}
+
+.login #content {
+	padding-left: 20px !important;
+	padding-right: 20px !important;
+}
+
+@media (max-width: 1024px) {
+	#changelist-search .small.quiet {
+		margin-top: 10px;
+		display: block;
+	}
+}
+
+@media (max-width: 767px) {
+	h1 {
+		margin-bottom: 10px;
+	}
+
+	.form-row,
+	.change-list .filtered .paginator,
+	.filtered #toolbar {
+		padding-left: 1.45560407569% !important;												/* 10px * 100% / 687px */
+		padding-right: 1.45560407569% !important;												/* 10px * 100% / 687px */
+	}
+
+	#content {
+		padding-left: 5.21512385919%;												/* = 40px * 100% / 767px */
+		padding-right: 5.21512385919%;											/* = 40px * 100% / 767px */
+	}
+
+	#content-main,
+	#changelist-form .results,
+	.change-list .filtered .results,
+	.filtered #toolbar,
+	.filtered div.xfull,
+	#changelist-form {
+		width: 100% !important;
+		padding-right: 0;
+		margin-bottom: 40px;
+		margin-right: 0 !important;
+		float: none;
+	}
+
+	.change-list .filtered .paginator,
+	.filtered #toolbar{
+		width: 97.0887918486% !important;															/* = 667px * 100% / 687px */
+		margin-right: 0 !important;
+	}
+
+	.filtered div.xfull {
+		margin-bottom: 0 !important;
+	}
+
+	#changelist-filter {
+		margin-top: 0 !important;
+		overflow-y: hidden;
+		transition: height 0.3s linear;
+	}
+
+	#changelist-filter #filters-summary {
+		display: block;
+	}
+
+	#changelist-filter h2 {
+		cursor: pointer;
+		position: relative;
+		padding-right: 25px !important;
+	}
+
+	#changelist-filter h2:after {
+		content: "";
+		position: absolute;
+		right: 10px;
+		top: 12px;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 5px 5px 0 5px;
+		border-color: #ffffff transparent transparent transparent;
+	}
+
+	#changelist-filter.open h2:after {
+		border-width: 0 5px 5px 5px;
+		border-color: transparent transparent #ffffff transparent;
+	}
+
+	#content-related,
+	#changelist-filter,
+	p.datetime,
+	.form-row.field-updated_at label {
+		width: 100% !important;
+		position: static !important;
+		float: none;
+	}
+
+	.selector-add,
+	.selector-remove {
+		-webkit-transform: rotate(90deg);
+		-moz-transform: rotate(90deg);
+		-ms-transform: rotate(90deg);
+		-o-transform: rotate(90deg);
+		transform: rotate(90deg);
+	}
+
+	.aligned label {
+		width: 23.988005997% !important;																	/* 160px * 100% / 667px */
+		padding-right: 1.49925037481% !important;													/* 10px * 100% / 667px */
+	}
+
+	.related-widget-wrapper {
+		width: 100% !important;
+		/*width: 74.6626686657% !important;*/																	/* 498px * 100% / 667px */
+	}
+
+	.selector-available, .selector-chosen {
+		width: 100% !important;
+		float: none !important;
+	}
+
+	.selector .selector-filter,
+	.module caption {
+		padding-left: 1.19940029985% !important;													/* = 8px * 100% / 667px */
+		padding-right: 1.19940029985% !important;													/* = 8px * 100% / 667px */
+	}	
+
+	.selector ul.selector-chooser {
+		margin-top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 10px !important;
+		margin-bottom: 10px !important;
+		float: none !important;
+		width: 100% !important;
+		padding: 0 !important;
+		text-align: center;
+	}
+
+	.selector ul.selector-chooser li {
+		display: inline-block;
+	}
+
+	.vTextField {
+		width: 38.9805097451% !important;																	/* = 260px * 100% / 667px */
+	}
+
+	.selector .selector-filter label,
+	.inline-group .aligned .selector .selector-filter label {
+		width: 5.70107858243% !important;																	/* = 37px * 100% / 649px */
+		padding: 0 !important;
+		text-align: center;
+	}
+
+	#profile-group .selector .selector-filter {
+		padding-left: 8px !important;
+		padding-right: 8px !important;
+	}
+
+	.selector .selector-available input {
+		width: 90.9090909091% !important;																	/* = 590px * 100% / 649px */
+		margin-left: 1.23266563945% !important;														/* = 8px * 100% / 649px */
+		padding-left: 0.92449922958% !important;													/* = 6px * 100% / 649px */
+		padding-right: 0.92449922958% !important;													/* = 6px * 100% / 649px */
+	}
+
+	.nowrap {
+		white-space: nowrap;
+	}
+
+	.minwidth {
+		min-width: 200px;
+	}
+
+	.object-tools {
+		float: none;
+		margin-top: 0;
+	}
+
+	.object-tools li {
+		display: inline;
+		float: none;
+		height: 26px;
+		margin-left: 0;
+		margin-right: 5px;
+	}
+
+	.object-tools a:link,
+	.object-tools a:visited {
+		display: inline-block;
+		float: none;
+	}
+
+	.button.default,
+	input.default[type="submit"],
+	.submit-row input.default {
+		float: none;
+	}
+
+	.submit-row p.deletelink-box {
+		float: none !important;
+		text-align: left;
+		order: 1;
+		margin-bottom: 0 !important;
+		margin-top: 20px !important;
+	}
+
+	.submit-row input[type="text"],
+	.submit-row input[type="number"],
+	.submit-row input[type="submit"] {
+		display: inline-block;
+		margin-left: 0 !important;
+		font-size: 14px !important;
+		align-self: flex-end;
+	}
+
+	.module.aligned.wide input[type="text"],
+	.module.aligned.wide input[type="number"],
+	.module.aligned.wide input[type="submit"],
+	.module.aligned.wide input[type="password"],
+	.module.aligned.wide input[type="email"] {
+		width: 38.9805097451% !important;																	/* = 260px * 100% / 667px */
+		padding-left: 0.89955022488% !important;													/* = 6px * 100% / 667px */
+		padding-right: 0.89955022488% !important;													/* = 6px * 100% / 667px */
+	}
+
+	form .wide p,
+	form .wide input + p.help,
+	form .wide input + div.help,
+	form .aligned p.help,
+	form .aligned div.help	 {
+		margin-left: 23.988005997% !important;														/* = 160px * 100% / 667px */
+		padding-left: 1.49925037481% !important;													/* = 10px * 100% / 667px */
+	}
+
+	form .aligned .related-widget-wrapper + p.help,
+	form .aligned .related-widget-wrapper + div.help {
+		margin-left: 0 !important;
+		padding-left: 3px !important;
+	}
+
+	.related-widget-wrapper-link.add-related {
+		display: block;
+		float: none;
+		margin-bottom: 10px;
+	}
+
+	.submit-row {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		flex-wrap: wrap;		
+	}
+
+	.submit-row a.deletelink {
+		display: inline-block !important;
+	}
+
+	.submit-row input {
+		margin-bottom: 10px !important;
+	}
+
+	.submit-row p.deletelink-box:last-child,
+	.submit-row input:last-child {
+		margin-bottom: 0 !important;
+	}
+
+	.calendarbox,
+	.clockbox {
+		left: 50% !important;
+		top: 50% !important;
+		position: fixed !important;
+		z-index: 1 !important;
+	}
+
+	.calendarbox:before,
+	.clockbox:before {
+		content: "";
+		background-color: rgba(0, 0, 0, 0.5);
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		z-index: -1;
+	}
+
+	.calendarbox {
+		margin-left: -115px !important;
+		margin-top: -132px !important;
+	}
+
+	.clockbox {
+		margin-left: -43px !important;
+		margin-top: -91px !important;
+	}
+
+	#branding {
+		float: none;
+	}
+
+	#header {
+		padding: 15px;
+		height: auto;
+		line-height: 1;
+	}
+
+	#user-tools {
+		float: none;
+		margin: 12px 0 0;
+		font-weight: 400;
+		font-size: 10px;
+		line-height: 1.5;
+		text-align: left;
+	}
+
+	html[dir="rtl"] #user-tools {
+		text-align: right;
+	}
+}
+
+@media (max-width: 512px) {
+	#content {
+		padding-left: 5.2734375% !important;															/* 27px * 100% / 512px */
+		padding-right: 5.2734375% !important;														/* 27px * 100% / 512px */
+	}
+
+	.submit-row input {
+		width: 100%;
+	}
+
+	.submit-row p.deletelink-box {
+		text-align: center;
+	}
+
+	.submit-row a.deletelink {
+		display: block !important;
+	}
+
+	.aligned label,
+	.related-widget-wrapper	 {
+		width: 100% !important;
+		float: none !important;
+		padding-right: 0 !important;
+	}
+
+	label.vCheckboxLabel {
+		width: auto !important;
+	}
+
+	.module.aligned.wide input[type="text"],
+	.module.aligned.wide input[type="number"],
+	.module.aligned.wide input[type="submit"],
+	.module.aligned.wide input[type="password"],
+	.module.aligned.wide input[type="email"],
+	.vTextField {
+		padding-left: 1.3698630137% !important;								/* 6px * 100% / 438px */
+		padding-right: 1.3698630137% !important;							/* 6px * 100% / 438px */
+		width: 96.803652968% !important;											/* 424px * 100% / 438px */
+	}
+
+	form .aligned p.help,
+	form .aligned div.help,
+	form .wide p,
+	form .wide input + p.help,
+	form .wide input + div.help {
+		margin-left: 0 !important;
+	}
+
+	.form-row,
+	.change-list .filtered .paginator,
+	.filtered #toolbar {
+		padding-left: 2.18340611354% !important;												/* 10px * 100% / 458px */
+		padding-right: 2.18340611354% !important;												/* 10px * 100% / 458px */
+		width: 95.6331877729% !important;																/* 438px * 100% / 458px */
+	}
+
+	#changelist .actions span.action-counter {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+
+	.datetime input,
+	.form-row .datetime input.vDateField,
+	.form-row .datetime input.vTimeField {
+		margin-left: 0 !important;
+	}
+
+	.selector .selector-filter label,
+	.inline-group .aligned .selector .selector-filter label {
+		width: 5.2380952381% !important;																/* 22px * 100% / 420px */
+		padding-right: 0.47619047619% !important;												/* 2px * 100% / 420px */
+		float: left !important;
+	}
+
+	.selector .selector-available input {
+		width: 88.5714285714% !important;																	/* = 372px * 100% / 420px */
+		margin-left: 1.90476190476% !important;														/* = 8px * 100% / 420px */
+		padding-left: 1.42857142857% !important;													/* = 6px * 100% / 420px */
+		padding-right: 1.42857142857% !important;													/* = 6px * 100% / 420px */
+	}
+
+	#changelist .actions select {
+		max-width: 170px;
+	}
+}
+
+@media (max-width: 320px) {
+	.object-tools li {
+		display: block;
+		margin-right: 0;
+	}
+}

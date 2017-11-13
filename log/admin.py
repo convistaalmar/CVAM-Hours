@@ -88,7 +88,7 @@ class EntryAdmin(admin.ModelAdmin):
 		list_filter = copy(self.list_filter)
 		if request.user.is_superuser:
 			if 'employee' not in list_filter: list_filter += ['employee']	
-			if 'project__client' not in list_filter: list_filter += ['project__client']
+			# if 'project__client' not in list_filter: list_filter += ['project__client']
 		return list_filter	
 	
 	

@@ -1,5 +1,5 @@
 {% extends "admin/change_list.html" %}
-{% load admin_list i18n %}
+{% load admin_list i18n static %}
 
 {% block extrastyle %}{{ block.super }}
 <style type="text/css">
@@ -9,34 +9,34 @@
     border-top: 2px solid #ddd !important;
 	}
 
-#changelist .last_row td {	
+#changelist .last_row td {
 	border-right: none ! important;
 	border-left: none ! important;
 	}
 
-#changelist .last_row td:nth-child(2) {	
-	text-align: right; 
+#changelist .last_row td:nth-child(2) {
+	text-align: right;
 	}
 
 .paginator strong {
 	color: #000;
 	font-weight: normal;
 	}
-	
+
 .paginator i {
 	font-style: normal;
-    text-shadow: 0 0 5px rgba(0, 169, 224, .9);	
+    text-shadow: 0 0 5px rgba(0, 169, 224, .9);
 	}
-	
+
 
 
 #result_list i {
-	font-style: normal;	
+	font-style: normal;
 /*	display: block;
 	overflow: hidden;
 	width: 800px;
 	white-space: nowrap;
-*/	
+*/
 	}
 
 /*
@@ -50,15 +50,15 @@
 #result_list th {
 	overflow: hidden;
 	white-space: nowrap;
-	}	
-*/	
-	
+	}
+*/
 </style>
+<link rel="stylesheet" type="text/css" href="{% static "adminresponsive/style.css" %}" />
 {% endblock %}
 
 {% block extrahead %}{{ block.super }}
 <script>
-django.jQuery(function($) { 
+django.jQuery(function($) {
 
 	/*$('#changelist table').prepend(
 		'<colgroup>' +
@@ -67,18 +67,24 @@ django.jQuery(function($) {
 		'	<col class="c2" />' +
 		'	<col class="c3" />' +
 		'	<col class="c4" />' +
-		'	<col class="c5" />' +		
-		'	<col class="c6" />' +					
+		'	<col class="c5" />' +
+		'	<col class="c6" />' +
 		'</colgroup>'
 	);*/
 
 	$('.paginator').append(
 		' <i>&lowast;</i> <strong>{{ total_hours }} hs.</strong>'
-	);			
-			
-});	
+	);
+
+});
 
 
 
 </script>
+{% endblock %}
+
+
+{% block footer %}
+  {{ block.super }}
+  <script type="text/javascript" src="{% static "adminresponsive/scripts.js" %}"></script>
 {% endblock %}
