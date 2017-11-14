@@ -7,6 +7,8 @@ from log.models import Employee
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_user_employee(sender, instance, created, **kwargs):
 	if created:
-	    Employee.objects.create(user=instance)
+		Employee.objects.create(user=instance)
+		instance.is_staff = True
+		instance.save()
 	else:
-            instance.employee.save()
+		instance.employee.save()
