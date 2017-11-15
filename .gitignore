@@ -1,6 +1,7 @@
 
 /.eprj
 /.env
+/.env3.5
 /_src
 /hours/settings_local.py
 /hours/django.wsgi

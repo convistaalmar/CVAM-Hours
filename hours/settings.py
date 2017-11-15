@@ -130,4 +130,4 @@ ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
 try:
     from .settings_local import *
 except:
-    print "Notice: Didn't import settings_local."
+    print ("Notice: Didn't import settings_local.")
