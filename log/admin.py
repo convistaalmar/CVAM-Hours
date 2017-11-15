@@ -26,8 +26,7 @@ class EntryAdmin(admin.ModelAdmin):
 		if db_field.name == 'work_type':
 			kwargs['queryset'] = WorkType.objects.filter(employee=request.user.employee)					
 			if latest: kwargs['initial'] = latest.work_type
-		
-		# FIXME si edito entradas de otros, se cambia el valor del desplegable		
+
 		return super(EntryAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
 
