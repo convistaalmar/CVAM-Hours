@@ -15,9 +15,9 @@ class FilterEntriesByProject(SimpleListFilter):
 
         return response
 
-    title = u'Client'
+    title = u'Project'
 
-    parameter_name = 'client'
+    parameter_name = 'project'
 
     def queryset(self, request, queryset):
         if self.value():
