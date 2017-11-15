@@ -16,7 +16,7 @@
 			if ($.trim(liText) != "All") {
 				filtersList.push(liLabel + ": " + liText);
 			}
-		})
+		});
 
 		var arrayLength = filtersList.length;
 
