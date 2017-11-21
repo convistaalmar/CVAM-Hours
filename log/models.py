@@ -14,7 +14,7 @@ class Entry(models.Model):
 	created = models.DateTimeField('Created at', auto_now_add=True)
 	updated = models.DateTimeField('Updated at', auto_now=True)	
 		
-	def __unicode__(self):
+	def __str__(self):
 		return "%s %s" % (self.date, self.hours)
 
 	def hours_minutes(self):
@@ -33,7 +33,7 @@ class Client(models.Model):
 	
 	name = models.CharField(max_length=25)
 		
-	def __unicode__(self):
+	def __str__(self):
 		return self.name
 		
 	class Meta:
@@ -45,7 +45,7 @@ class Project(models.Model):
 	name = models.CharField(max_length=25)
 	client = models.ForeignKey("Client")
 		
-	def __unicode__(self):
+	def __str__(self):
 		return self.name
 		
 	class Meta:
@@ -55,7 +55,7 @@ class WorkType(models.Model):
 	
 	name = models.CharField(max_length=25)
 		
-	def __unicode__(self):
+	def __str__(self):
 		return self.name
 				
 	class Meta:
@@ -74,7 +74,7 @@ class Employee(models.Model):
 		except: 
 			return False
 		
-	def __unicode__(self):
+	def __str__(self):
 		return self.user.get_full_name()
 		
 	class Meta:

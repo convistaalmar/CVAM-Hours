@@ -6,10 +6,9 @@ from log.models import Project
 class FilterEntriesByProject(SimpleListFilter):
 
     def lookups(self, request, model_admin):
-        if request.user.is_superuser:
-            all_entries = Project.objects.all().distinct()
-        else:
-            all_entries = Project.objects.filter(employee__user=request.user).distinct()
+        all_entries = Project.objects.all().distinct()
+        if not request.user.is_superuser:
+            all_entries = all_entries.filter(employee__user=request.user)
 
         response = [(entry.id, entry.name) for entry in all_entries]
 

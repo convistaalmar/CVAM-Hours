@@ -6,8 +6,8 @@ from django.forms.fields import TimeField
 from django.forms.widgets import TimeInput, Textarea
 from django.utils.text import Truncator
 from log.models import *
-from filterbyclient import FilterEntriesByClient
-from filterbyproject import FilterEntriesByProject
+from log.filters.filterbyclient import FilterEntriesByClient
+from log.filters.filterbyproject import FilterEntriesByProject
 
 class EntryAdmin(admin.ModelAdmin):
 
@@ -74,8 +74,7 @@ class EntryAdmin(admin.ModelAdmin):
 	list_display = ['date', 'project', 'hours_minutes', 'message_text', 'work_type']	
 	date_hierarchy = 'date'
 	search_fields = ['message']
-	list_filter = [FilterEntriesByClient, FilterEntriesByProject, 'work_type']
-	# list_filter = ['project', 'work_type']
+	list_filter = [FilterEntriesByProject, 'work_type', FilterEntriesByClient]
 
 	
 	def get_list_display(self, request):
@@ -89,7 +88,6 @@ class EntryAdmin(admin.ModelAdmin):
 		list_filter = copy(self.list_filter)
 		if request.user.is_superuser:
 			if 'employee' not in list_filter: list_filter += ['employee']
-			# if 'project__client' not in list_filter: list_filter += ['project__client']
 		return list_filter
 	
 	
