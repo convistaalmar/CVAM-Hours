@@ -36,7 +36,6 @@ class EntryAdmin(admin.ModelAdmin):
 	# http://djangosnippets.org/snippets/1054
 	
 	def get_queryset(self, request):
-		create_role_groups()
 		qs = super(EntryAdmin, self).get_queryset(request)
 		if request.user.is_superuser:
 			return qs
@@ -53,10 +52,19 @@ class EntryAdmin(admin.ModelAdmin):
 	def has_change_permission(self, request, obj=None):
 		if not obj:
 			return True # So they can see the change list page
-		if request.user.is_superuser or obj.employee == request.user.employee:
+		if (request.user.is_superuser or obj.employee == request.user.employee) \
+				and not request.user.groups.filter(name='Client').exists():
 			return True
 		else:
 			return False
+
+	def has_add_permission(self, request, obj=None):
+		if request.user.groups.filter(name='Client').exists():
+			return False
+		if not obj:
+			return True # So they can see the change list page
+		else:
+			return True
 	
 	has_delete_permission = has_change_permission	
 
