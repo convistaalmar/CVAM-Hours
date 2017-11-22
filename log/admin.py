@@ -1,13 +1,47 @@
 from copy import copy
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group, Permission
+from django.contrib.contenttypes.models import ContentType
 from django.forms.fields import TimeField
 from django.forms.widgets import TimeInput, Textarea
 from django.utils.text import Truncator
 from log.models import *
 from log.filters.filterbyclient import FilterEntriesByClient
 from log.filters.filterbyproject import FilterEntriesByProject
+
+
+def create_view_others_entries_permission():
+	content_type = ContentType.objects.get_for_model(Entry)
+	permission,created = Permission.objects.get_or_create(
+		codename='can_view_others_entries',
+		name='Can view others entries',
+		content_type=content_type,
+	)
+	return permission
+
+def create_view_entries_employee_permission():
+	content_type = ContentType.objects.get_for_model(Entry)
+	permission, created = Permission.objects.get_or_create(
+		codename='can_view_entries_employee',
+		name='Can view entries employee',
+		content_type=content_type,
+	)
+	return permission
+
+def create_role_permissions():
+	can_view_others_entries = create_view_others_entries_permission()
+	can_view_entries_employee = create_view_entries_employee_permission()
+	return can_view_entries_employee
+
+
+def create_role_groups():
+    pm, created = Group.objects.get_or_create(name='Project Manager')
+    client, created = Group.objects.get_or_create(name='Client')
+    can_view_entries_employee = create_role_permissions()
+    pm.permissions.add(can_view_others_entries)
+    pm.permissions.add(can_view_entries_employee)
+    client.permissions.add(can_view_others_entries)
 
 class EntryAdmin(admin.ModelAdmin):
 
@@ -34,9 +68,12 @@ class EntryAdmin(admin.ModelAdmin):
 	# http://djangosnippets.org/snippets/1054
 	
 	def get_queryset(self, request):
+		create_role_groups()
 		qs = super(EntryAdmin, self).get_queryset(request)
 		if request.user.is_superuser:
 			return qs
+		elif request.user.has_perm('log.can_view_others_entries'):
+			return qs.filter(project__in=request.user.employee.project.all())
 		else:
 			return qs.filter(employee = request.user.employee)
 	
@@ -79,14 +116,14 @@ class EntryAdmin(admin.ModelAdmin):
 	
 	def get_list_display(self, request):
 		list_display = copy(self.list_display)
-		if request.user.is_superuser:
+		if request.user.is_superuser or request.user.has_perm('log.can_view_entries_employee'):
 			if 'employee' not in list_display: list_display += ['employee']
 		return list_display
 	
 	
 	def get_list_filter(self, request):
 		list_filter = copy(self.list_filter)
-		if request.user.is_superuser:
+		if request.user.is_superuser or request.user.has_perm('log.can_view_entries_employee'):
 			if 'employee' not in list_filter: list_filter += ['employee']
 		return list_filter
 	

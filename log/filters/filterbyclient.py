@@ -7,6 +7,9 @@ class FilterEntriesByClient(SimpleListFilter):
 
     def lookups(self, request, model_admin):
         all_entries = Client.objects.all().distinct()
+        if request.user.groups.filter(name='Client').exists():
+            return None
+
         if not request.user.is_superuser:
             all_entries = all_entries.filter(project__employee__user=request.user)
 
