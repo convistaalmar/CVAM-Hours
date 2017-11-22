@@ -11,38 +11,6 @@ from log.filters.filterbyclient import FilterEntriesByClient
 from log.filters.filterbyproject import FilterEntriesByProject
 
 
-def create_view_others_entries_permission():
-	content_type = ContentType.objects.get_for_model(Entry)
-	permission,created = Permission.objects.get_or_create(
-		codename='can_view_others_entries',
-		name='Can view others entries',
-		content_type=content_type,
-	)
-	return permission
-
-def create_view_entries_employee_permission():
-	content_type = ContentType.objects.get_for_model(Entry)
-	permission, created = Permission.objects.get_or_create(
-		codename='can_view_entries_employee',
-		name='Can view entries employee',
-		content_type=content_type,
-	)
-	return permission
-
-def create_role_permissions():
-	can_view_others_entries = create_view_others_entries_permission()
-	can_view_entries_employee = create_view_entries_employee_permission()
-	return can_view_entries_employee
-
-
-def create_role_groups():
-    pm, created = Group.objects.get_or_create(name='Project Manager')
-    client, created = Group.objects.get_or_create(name='Client')
-    can_view_entries_employee = create_role_permissions()
-    pm.permissions.add(can_view_others_entries)
-    pm.permissions.add(can_view_entries_employee)
-    client.permissions.add(can_view_others_entries)
-
 class EntryAdmin(admin.ModelAdmin):
 
 	# Change form
