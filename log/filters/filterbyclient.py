@@ -7,7 +7,7 @@ class FilterEntriesByClient(SimpleListFilter):
 
     def lookups(self, request, model_admin):
         all_entries = Client.objects.all().distinct()
-        if request.user.groups.filter(name='Client').exists():
+        if not request.user.has_perm('log.can_view_entries_client'):
             return None
 
         if not request.user.is_superuser:

@@ -53,13 +53,14 @@ class EntryAdmin(admin.ModelAdmin):
 		if not obj:
 			return True # So they can see the change list page
 		if (request.user.is_superuser or obj.employee == request.user.employee) \
-				and not request.user.groups.filter(name='Client').exists():
+				and request.user.has_perm('log.change_entry'):
 			return True
 		else:
 			return False
 
 	def has_add_permission(self, request, obj=None):
-		if request.user.groups.filter(name='Client').exists():
+		if not request.user.has_perm('log.add_entry'):
+			self.list_display_links = (None,)
 			return False
 		if not obj:
 			return True # So they can see the change list page
