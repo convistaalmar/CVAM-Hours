@@ -48,12 +48,11 @@ class EntryAdmin(admin.ModelAdmin):
 		if not obj.pk: # So the admin can edit employee's hours
 			obj.employee = request.user.employee
 		obj.save()
-	
+
 	def has_change_permission(self, request, obj=None):
 		if not obj:
-			return True # So they can see the change list page
-		if (request.user.is_superuser or obj.employee == request.user.employee) \
-				and request.user.has_perm('log.change_entry'):
+			return True  # So they can see the change list page
+		if (request.user.is_superuser or obj.employee == request.user.employee) or request.user.has_perm('log.change_entry'):
 			return True
 		else:
 			return False
@@ -66,8 +65,14 @@ class EntryAdmin(admin.ModelAdmin):
 			return True # So they can see the change list page
 		else:
 			return True
+
+	def get_readonly_fields(self, request, obj=None):
+		if not request.user.is_superuser and obj.employee != request.user.employee:
+			return self.list_display + ['hours', 'message']
+		return self.readonly_fields
+
 	
-	has_delete_permission = has_change_permission	
+	has_delete_permission = has_change_permission
 
 
 	# Nice hours	

@@ -30,7 +30,8 @@ def create_role_groups():
     pm.permissions.add(can_view_others_entries, can_view_entries_employee, can_view_entries_client)
     entries_perm_codename = ['add_entry', 'change_entry', 'delete_entry']
     for perm in Permission.objects.filter(codename__in=entries_perm_codename):
-    	employee.permissions.add(perm)
+        employee.permissions.add(perm)
+        pm.permissions.add(perm)
     client.permissions.add(can_view_others_entries)
 
 
