@@ -10,7 +10,9 @@ class Entry(models.Model):
 	date = models.DateField(default=datetime.today)
 	hours = models.TimeField(blank=True, help_text="You can also enter minutes.")
 	message = models.CharField(max_length=255, help_text="Brief description of work done.<br>Add SVN revision or issue number if available.")
-	
+
+	billed = models.BooleanField(default=False)
+
 	created = models.DateTimeField('Created at', auto_now_add=True)
 	updated = models.DateTimeField('Updated at', auto_now=True)	
 		

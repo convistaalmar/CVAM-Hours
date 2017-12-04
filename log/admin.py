@@ -9,13 +9,30 @@ from log.models import *
 from log.filters.filterbyclient import FilterEntriesByClient
 from log.filters.filterbyproject import FilterEntriesByProject
 
+
+def mark_as_billed(modeladmin, request, queryset):
+    queryset.update(billed=True)
+mark_as_billed.short_description = "Mark entries as billed"
+
+def mark_as_non_billed(modeladmin, request, queryset):
+    queryset.update(billed=False)
+mark_as_non_billed.short_description = "Mark entries as non-billed"
+
+
 class EntryAdmin(admin.ModelAdmin):
 
 	# Change form
 	exclude = ['employee']	
-
+	actions = [mark_as_billed, mark_as_non_billed]
 	# Only show projects and worktypes for this user.
 	# Default to the last project/worktype used.
+
+	def get_form(self, request, obj=None, **kwargs):
+		if not request.user.is_superuser:
+			self.exclude = ('billed',)
+		form = super(EntryAdmin, self).get_form(request, obj, **kwargs)
+		return form
+
 	def formfield_for_foreignkey(self, db_field, request, **kwargs):
 		
 		latest = request.user.employee.latest_entry()
@@ -81,6 +98,8 @@ class EntryAdmin(admin.ModelAdmin):
 		list_display = copy(self.list_display)
 		if request.user.is_superuser:
 			if 'employee' not in list_display: list_display += ['employee']
+			if 'billed' not in list_display: list_display += ['billed']
+
 		return list_display
 	
 	
@@ -88,6 +107,8 @@ class EntryAdmin(admin.ModelAdmin):
 		list_filter = copy(self.list_filter)
 		if request.user.is_superuser:
 			if 'employee' not in list_filter: list_filter += ['employee']
+			if 'billed' not in list_filter: list_filter += ['billed']
+
 		return list_filter
 	
 	
