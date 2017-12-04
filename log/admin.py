@@ -67,8 +67,9 @@ class EntryAdmin(admin.ModelAdmin):
 			return True
 
 	def get_readonly_fields(self, request, obj=None):
-		if not request.user.is_superuser and obj.employee != request.user.employee:
-			return self.list_display + ['hours', 'message']
+		if obj:
+			if not request.user.is_superuser and obj.employee != request.user.employee:
+				return self.list_display + ['hours', 'message']
 		return self.readonly_fields
 
 	
