@@ -10,22 +10,27 @@ from log.filters.filterbyclient import FilterEntriesByClient
 from log.filters.filterbyproject import FilterEntriesByProject
 
 
-def mark_as_billed(modeladmin, request, queryset):
-    queryset.update(billed=True)
-mark_as_billed.short_description = "Mark entries as billed"
 
-def mark_as_non_billed(modeladmin, request, queryset):
-    queryset.update(billed=False)
-mark_as_non_billed.short_description = "Mark entries as non-billed"
 
 
 class EntryAdmin(admin.ModelAdmin):
 
 	# Change form
 	exclude = ['employee']	
-	actions = [mark_as_billed, mark_as_non_billed]
 	# Only show projects and worktypes for this user.
 	# Default to the last project/worktype used.
+
+	def mark_as_billed(modeladmin, request, queryset):
+		queryset.update(billed=True)
+
+	mark_as_billed.short_description = "Mark entries as billed"
+
+	def mark_as_non_billed(modeladmin, request, queryset):
+		queryset.update(billed=False)
+
+	mark_as_non_billed.short_description = "Mark entries as non-billed"
+
+	actions = ['mark_as_billed', 'mark_as_non_billed']
 
 	def get_form(self, request, obj=None, **kwargs):
 		if not request.user.is_superuser:
@@ -101,8 +106,16 @@ class EntryAdmin(admin.ModelAdmin):
 			if 'billed' not in list_display: list_display += ['billed']
 
 		return list_display
-	
-	
+
+	def get_actions(self, request):
+		actions = super(EntryAdmin, self).get_actions(request)
+		if not request.user.is_superuser:
+			if 'mark_as_billed' in actions:
+				del actions['mark_as_billed']
+			if 'mark_as_non_billed' in actions:
+				del actions['mark_as_non_billed']
+		return actions
+
 	def get_list_filter(self, request):
 		list_filter = copy(self.list_filter)
 		if request.user.is_superuser:
