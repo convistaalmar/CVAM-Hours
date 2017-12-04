@@ -16,7 +16,6 @@ from log.filters.filterbyproject import FilterEntriesByProject
 class EntryAdmin(admin.ModelAdmin):
 
 	# Change form
-	exclude = ['employee']	
 	# Only show projects and worktypes for this user.
 	# Default to the last project/worktype used.
 
@@ -33,9 +32,11 @@ class EntryAdmin(admin.ModelAdmin):
 	actions = ['mark_as_billed', 'mark_as_non_billed']
 
 	def get_form(self, request, obj=None, **kwargs):
+		selfie = copy(self)
+		selfie.exclude = ['employee']
 		if not request.user.is_superuser:
-			self.exclude = ('billed',)
-		form = super(EntryAdmin, self).get_form(request, obj, **kwargs)
+			selfie.exclude += ['billed']
+		form = super(EntryAdmin, selfie).get_form(request, obj, **kwargs)
 		return form
 
 	def formfield_for_foreignkey(self, db_field, request, **kwargs):
