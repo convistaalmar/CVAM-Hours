@@ -97,7 +97,7 @@ class EntryAdmin(admin.ModelAdmin):
 	list_display = ['date', 'project', 'hours_minutes', 'message_text', 'work_type']	
 	date_hierarchy = 'date'
 	search_fields = ['message']
-	list_filter = [FilterEntriesByProject, 'work_type', FilterEntriesByClient]
+	list_filter = [('project', FilterEntriesByProject), 'work_type', ('project', FilterEntriesByClient)]
 
 	
 	def get_list_display(self, request):
