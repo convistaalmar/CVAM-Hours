@@ -1,27 +1,22 @@
 from django.contrib.admin import SimpleListFilter
+from .filterbyproject import FilterEntriesByProject
+from log.models import Client, Entry, Project
 
-from log.models import Client
 
+class FilterEntriesByClient(FilterEntriesByProject):
 
-class FilterEntriesByClient(SimpleListFilter):
-
-    def lookups(self, request, model_admin):
-        all_entries = Client.objects.all().distinct()
-        if not request.user.has_perm('log.can_view_entries_client'):
-            return None
-
-        if not request.user.is_superuser:
-            all_entries = all_entries.filter(project__employee__user=request.user)
-
-        response = [(entry.id, entry.name) for entry in all_entries]
-
-        return response
+    def get_lookup_choices(self, changelist):
+        qs = Entry.objects.all()
+        if changelist.params:
+            args = {}
+            for key in changelist.params:
+                if 'date' in key:
+                    args[key] = changelist.params[key]
+            qs = qs.filter(**args)
+        projects_available = list(
+            set([project for project in qs.values_list('project_id', flat=True)]))
+        self.lookup_choices = Client.objects.filter(project__in=projects_available).values_list('id', 'name')
 
     title = u'Client'
 
     parameter_name = 'client'
-
-    def queryset(self, request, queryset):
-        if self.value():
-            return queryset.filter(project__client=self.value())
-        return queryset

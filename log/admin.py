@@ -14,10 +14,29 @@ from log.filters.filterbyproject import FilterEntriesByProject
 class EntryAdmin(admin.ModelAdmin):
 
 	# Change form
-	exclude = ['employee']	
-
 	# Only show projects and worktypes for this user.
 	# Default to the last project/worktype used.
+
+	def mark_as_billed(modeladmin, request, queryset):
+		queryset.update(billed=True)
+
+	mark_as_billed.short_description = "Mark entries as billed"
+
+	def mark_as_non_billed(modeladmin, request, queryset):
+		queryset.update(billed=False)
+
+	mark_as_non_billed.short_description = "Mark entries as non-billed"
+
+	actions = ['mark_as_billed', 'mark_as_non_billed']
+
+	def get_form(self, request, obj=None, **kwargs):
+		selfie = copy(self)
+		selfie.exclude = ['employee']
+		if not request.user.is_superuser:
+			selfie.exclude += ['billed']
+		form = super(EntryAdmin, selfie).get_form(request, obj, **kwargs)
+		return form
+
 	def formfield_for_foreignkey(self, db_field, request, **kwargs):
 		
 		latest = request.user.employee.latest_entry()
@@ -72,7 +91,7 @@ class EntryAdmin(admin.ModelAdmin):
 				return self.list_display + ['hours', 'message']
 		return self.readonly_fields
 
-	
+
 	has_delete_permission = has_change_permission
 
 
@@ -94,20 +113,32 @@ class EntryAdmin(admin.ModelAdmin):
 	list_display = ['date', 'project', 'hours_minutes', 'message_text', 'work_type']	
 	date_hierarchy = 'date'
 	search_fields = ['message']
-	list_filter = [FilterEntriesByProject, 'work_type', FilterEntriesByClient]
+	list_filter = [('project', FilterEntriesByProject), 'work_type', ('project', FilterEntriesByClient)]
 
 	
 	def get_list_display(self, request):
 		list_display = copy(self.list_display)
 		if request.user.is_superuser or request.user.has_perm('log.can_view_entries_employee'):
 			if 'employee' not in list_display: list_display += ['employee']
+			if 'billed' not in list_display: list_display += ['billed']
+
 		return list_display
-	
-	
+
+	def get_actions(self, request):
+		actions = super(EntryAdmin, self).get_actions(request)
+		if not request.user.is_superuser:
+			if 'mark_as_billed' in actions:
+				del actions['mark_as_billed']
+			if 'mark_as_non_billed' in actions:
+				del actions['mark_as_non_billed']
+		return actions
+
 	def get_list_filter(self, request):
 		list_filter = copy(self.list_filter)
 		if request.user.is_superuser or request.user.has_perm('log.can_view_entries_employee'):
 			if 'employee' not in list_filter: list_filter += ['employee']
+			if 'billed' not in list_filter: list_filter += ['billed']
+
 		return list_filter
 	
 	
