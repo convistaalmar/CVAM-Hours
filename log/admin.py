@@ -118,7 +118,7 @@ class EntryAdmin(admin.ModelAdmin):
 	
 	def get_list_display(self, request):
 		list_display = copy(self.list_display)
-		if request.user.is_superuser or request.user.has_perm('log.can_view_entries_employee'):
+		if request.user.has_perm('log.can_view_entries_employee'):
 			if 'employee' not in list_display: list_display += ['employee']
 			if 'billed' not in list_display: list_display += ['billed']
 
@@ -135,7 +135,7 @@ class EntryAdmin(admin.ModelAdmin):
 
 	def get_list_filter(self, request):
 		list_filter = copy(self.list_filter)
-		if request.user.is_superuser or request.user.has_perm('log.can_view_entries_employee'):
+		if request.user.has_perm('log.can_view_entries_employee'):
 			if 'employee' not in list_filter: list_filter += ['employee']
 			if 'billed' not in list_filter: list_filter += ['billed']
 
