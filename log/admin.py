@@ -17,6 +17,12 @@ class EntryAdmin(admin.ModelAdmin):
 	# Only show projects and worktypes for this user.
 	# Default to the last project/worktype used.
 
+	def get_list_display_links(self, request, list_display):
+		if not request.user.has_perm('change_entry'):
+			return [None,]
+		return ['date',]
+
+
 	def mark_as_billed(modeladmin, request, queryset):
 		queryset.update(billed=True)
 
