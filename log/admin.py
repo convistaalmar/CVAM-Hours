@@ -58,7 +58,7 @@ class EntryAdmin(admin.ModelAdmin):
 		qs = super(EntryAdmin, self).get_queryset(request)
 		if request.user.is_superuser:
 			return qs
-		elif request.user.has_perm('log.can_view_others_entries'):
+		elif request.user.has_perm('log.view_others_entries'):
 			return qs.filter(project__in=request.user.employee.project.all())
 		else:
 			return qs.filter(employee = request.user.employee)
@@ -77,13 +77,11 @@ class EntryAdmin(admin.ModelAdmin):
 			return False
 
 	def has_add_permission(self, request, obj=None):
+		selfie = copy(self)
 		if not request.user.has_perm('log.add_entry'):
-			self.list_display_links = (None,)
+			selfie.list_display_links = (None,)
 			return False
-		if not obj:
-			return True # So they can see the change list page
-		else:
-			return True
+		return True
 
 	def get_readonly_fields(self, request, obj=None):
 		if obj:
@@ -118,7 +116,7 @@ class EntryAdmin(admin.ModelAdmin):
 	
 	def get_list_display(self, request):
 		list_display = copy(self.list_display)
-		if request.user.has_perm('log.can_view_entries_employee'):
+		if request.user.has_perm('log.view_entries_employee'):
 			if 'employee' not in list_display: list_display += ['employee']
 			if 'billed' not in list_display: list_display += ['billed']
 
@@ -135,7 +133,7 @@ class EntryAdmin(admin.ModelAdmin):
 
 	def get_list_filter(self, request):
 		list_filter = copy(self.list_filter)
-		if request.user.has_perm('log.can_view_entries_employee'):
+		if request.user.has_perm('log.view_entries_employee'):
 			if 'employee' not in list_filter: list_filter += ['employee']
 			if 'billed' not in list_filter: list_filter += ['billed']
 

@@ -5,6 +5,10 @@ from log.models import Client, Entry, Project
 
 class FilterEntriesByClient(FilterEntriesByProject):
 
+    def __init__(self, field, request, params, model, model_admin, field_path):
+        super(FilterEntriesByClient, self).__init__(field, request, params, model, model_admin, field_path)
+        self.title = 'client'
+
     def get_lookup_choices(self, changelist):
         qs = Entry.objects.all()
         if changelist.params:

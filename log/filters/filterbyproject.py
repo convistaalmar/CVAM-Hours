@@ -7,8 +7,12 @@ from django.utils.encoding import force_text
 
 class FilterEntriesByProject(RelatedFieldListFilter):
 
+    def __init__(self, field, request, params, model, model_admin, field_path):
+        super(FilterEntriesByProject, self).__init__(field, request, params, model, model_admin, field_path)
+        self.projects = request.user.employee.project.all()
+
     def get_lookup_choices(self, changelist):
-        qs = Entry.objects.all()
+        qs = Entry.objects.filter(project__in=self.projects)
         if changelist.params:
             args = {}
             for key in changelist.params:
@@ -18,6 +22,9 @@ class FilterEntriesByProject(RelatedFieldListFilter):
         projects_available = list(
             set([project for project in qs.values_list('project_id', flat=True)]))
         self.lookup_choices = Project.objects.filter(id__in=projects_available).values_list('id', 'name')
+
+    def lookups(self, request, model_admin):
+        super(FilterEntriesByProject, self).lookups(request, model_admin)
 
     def choices(self, changelist):
         self.get_lookup_choices(changelist)
