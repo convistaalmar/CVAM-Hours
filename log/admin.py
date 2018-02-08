@@ -35,13 +35,17 @@ class EntryAdmin(admin.ModelAdmin):
 
 	actions = ['mark_as_billed', 'mark_as_non_billed']
 
-	def get_form(self, request, obj=None, **kwargs):
+
+	def get_exclude(self, request, obj=None):
 		selfie = copy(self)
-		selfie.exclude = ['employee']
+		selfie.exclude = []
+		if not request.user.has_perm('log.view_entries_employee'):
+			selfie.exclude += ['employee']
+
 		if not request.user.is_superuser:
 			selfie.exclude += ['billed']
-		form = super(EntryAdmin, selfie).get_form(request, obj, **kwargs)
-		return form
+		return selfie.exclude
+
 
 	def formfield_for_foreignkey(self, db_field, request, **kwargs):
 		
