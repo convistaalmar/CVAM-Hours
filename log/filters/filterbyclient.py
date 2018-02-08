@@ -19,7 +19,7 @@ class FilterEntriesByClient(FilterEntriesByProject):
             qs = qs.filter(**args)
         projects_available = list(
             set([project for project in qs.values_list('project_id', flat=True)]))
-        self.lookup_choices = Client.objects.filter(project__in=projects_available).values_list('id', 'name')
+        self.lookup_choices = Client.objects.filter(project__in=projects_available).values_list('id', 'name').distinct()
 
     title = u'Client'
 
