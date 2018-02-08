@@ -22,19 +22,23 @@ class EntryAdmin(admin.ModelAdmin):
 			return [None,]
 		return ['date',]
 
+	def make_mark_as_billed_action(self):
+		def mark_as_billed(modeladmin, request, queryset):
+			queryset.update(billed=True)
 
-	def mark_as_billed(modeladmin, request, queryset):
-		queryset.update(billed=True)
+		mark_as_billed.__name__ = 'mark_as_billed'
+		mark_as_billed.short_description = "Mark entries as billed"
 
-	mark_as_billed.short_description = "Mark entries as billed"
+		return mark_as_billed
 
-	def mark_as_non_billed(modeladmin, request, queryset):
-		queryset.update(billed=False)
+	def make_mark_as_non_billed_action(self):
+		def mark_as_non_billed(modeladmin, request, queryset):
+			queryset.update(billed=False)
 
-	mark_as_non_billed.short_description = "Mark entries as non-billed"
+		mark_as_non_billed.__name__ = 'mark_as_non_billed'
+		mark_as_non_billed.short_description = "Mark entries as non-billed"
 
-	actions = ['mark_as_billed', 'mark_as_non_billed']
-
+		return mark_as_non_billed
 
 	def get_exclude(self, request, obj=None):
 		selfie = copy(self)
@@ -134,11 +138,13 @@ class EntryAdmin(admin.ModelAdmin):
 
 	def get_actions(self, request):
 		actions = super(EntryAdmin, self).get_actions(request)
-		if not request.user.is_superuser:
-			if 'mark_as_billed' in actions:
-				del actions['mark_as_billed']
-			if 'mark_as_non_billed' in actions:
-				del actions['mark_as_non_billed']
+		if request.user.is_superuser:
+			billed_actions = [self.make_mark_as_billed_action(), self.make_mark_as_non_billed_action()]
+			for billed_action in billed_actions:
+				if billed_action not in actions:
+					actions[billed_action.__name__] = (billed_action,
+													   billed_action.__name__,
+													   billed_action.short_description)
 		return actions
 
 	def get_list_filter(self, request):
