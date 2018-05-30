@@ -1,0 +1,15 @@
+{
+  "name": "CVAM Hours",
+  "short_name": "Hours",
+  "display": "fullscreen",
+  "start_url": "/",
+  "theme_color": "#00A9E0",
+  "background_color": "#111111",
+  "icons": [
+    {
+      "src": "../img/favicon.ico",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

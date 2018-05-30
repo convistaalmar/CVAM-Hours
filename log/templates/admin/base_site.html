@@ -12,5 +12,12 @@
 <link rel="stylesheet" type="text/css" href="{% static "css/admin.css" %}" />
 <link rel="Shortcut Icon" type="image/x-icon" href="{% static "img/favicon.ico" %}" />
 {% endblock %}
+{% block extrahead %}
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <link rel="manifest" href="{% static "js/manifest.json" %}" />
+
+    <script defer src="{% static 'js/site.js' %}"></script>
+{% endblock %}
+
 
 {% block nav-global %}{% endblock %}
